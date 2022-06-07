@@ -6,6 +6,8 @@ const usuarioRoute = require("./routes/UsuarioRoute");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.urlencoded({ extends: true }));
+
 app.set("view engine", "ejs");
 
 app.use("/usuario", usuarioRoute);
