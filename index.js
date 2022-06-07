@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const porta = 3000;
+const path = require("path");
+const usuarioRoute = require("./routes/UsuarioRoute");
 
-app.get("/", (req, res) => {
-  res.send("Oi Diego!");
-});
+app.use(express.static(path.join(__dirname, "public")));
+
+app.set("view engine", "ejs");
+
+app.use("/usuario", usuarioRoute);
 
 app.listen(porta, () => {
   console.log("Servidor funcionando na porta 3000");
