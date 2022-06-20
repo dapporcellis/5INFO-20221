@@ -13,9 +13,19 @@ function add(req, res) {
   usuario.email = email;
   usuario.senha = senha;
   usuario.foto = foto;
-  usuario.save();
+  usuario.save(function (err, result) {
+    if (err) {
+      res.send("Aconteceu o seguinte erro: " + err);
+    } else {
+      res.send("Seus dados foram inseridos com sucesso!");
+    }
+  });
 }
-function lst(req, res) {}
+function lst(req, res) {
+  Usuario.find({}).then(function (usuarios) {
+    res.render("usuario/lst.ejs", { Usuarios: usuarios });
+  });
+}
 function filtro(req, res) {}
 function abreedt(req, res) {}
 function edt(req, res) {}
