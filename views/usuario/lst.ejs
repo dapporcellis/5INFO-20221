@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar dados</title>
-</head>
-<body>
+<%-include('../cabecalho.ejs')%>
+
+    <form method="post">
+        <input type="text" class="pesquisa" name="pesquisa" placeholder="Digite o nome que deseja pesquisar.">
+        <input type="submit" value="Pesquisar">
+    </form>
     <table>
         <tr>
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Foto</th>
+            <th>Ações</th>
         </tr>
         <% Usuarios.forEach(function(usuario){ %>
         <tr>
@@ -28,8 +26,15 @@
             <td>
                 <%=usuario.foto%>
             </td>
+            <td>
+                <a href="/usuario/edt">
+                    <img class="img-responsive" src="/edit.png" alt="Editar">
+                </a>
+                <a href="/usuario/del/<%=usuario._id%>">
+                    <img class="img-responsive" src="/delete.png" alt="Deletar">
+                </a>
+            </td>
         </tr>
         <% }) %>
     </table>
-</body>
-</html>
+<%-include('../rodape.ejs')%>

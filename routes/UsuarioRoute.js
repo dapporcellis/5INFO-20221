@@ -21,6 +21,6 @@ router.get("/edt", UsuarioController.abreedt);
 router.post("/edt", UsuarioController.edt);
 
 //deletar dados
-router.get("/del", UsuarioController.deleta);
+router.get("/del/:id", UsuarioController.deleta);
 
 module.exports = router;
