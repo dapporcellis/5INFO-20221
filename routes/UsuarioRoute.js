@@ -15,10 +15,10 @@ router.get("/lst", UsuarioController.lst);
 router.post("/lst", UsuarioController.filtro);
 
 //abrir edita
-router.get("/edt", UsuarioController.abreedt);
+router.get("/edt/:id", UsuarioController.abreedt);
 
 //editar dados
-router.post("/edt", UsuarioController.edt);
+router.post("/edt/:id", UsuarioController.edt);
 
 //deletar dados
 router.get("/del/:id", UsuarioController.deleta);
