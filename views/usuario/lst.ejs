@@ -24,10 +24,10 @@
                 <%=usuario.email%>
             </td>
             <td>
-                <%=usuario.foto%>
+                <img class="img-responsive" src="/fotos/<%=usuario.foto%>" alt="Foto do usuário">
             </td>
             <td>
-                <a href="/usuario/edt">
+                <a href="/usuario/edt/<%=usuario._id%>">
                     <img class="img-responsive" src="/edit.png" alt="Editar">
                 </a>
                 <a href="/usuario/del/<%=usuario._id%>">
