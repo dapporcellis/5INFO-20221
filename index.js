@@ -12,6 +12,10 @@ app.set("view engine", "ejs");
 
 app.use("/usuario", usuarioRoute);
 
+app.get("/anime/add", function (req, res) {
+  res.render("index.ejs");
+});
+
 app.listen(porta, () => {
   console.log("Servidor funcionando na porta 3000");
 });
