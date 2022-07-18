@@ -1,7 +1,7 @@
 const Usuario = require("../model/Usuario");
 
 function abreadd(req, res) {
-  res.render("usuario/add.ejs");
+  res.render("usuario/add.ejs", { Login: req.user });
 }
 function add(req, res) {
   var usuario = new Usuario();
@@ -18,19 +18,20 @@ function add(req, res) {
   });
 }
 function lst(req, res) {
+  console.log(req.user);
   Usuario.find({}).then(function (usuarios) {
-    res.render("usuario/lst.ejs", { Usuarios: usuarios });
+    res.render("usuario/lst.ejs", { Usuarios: usuarios, Login: req.user });
   });
 }
 function filtro(req, res) {
   var pesquisa = req.body.pesquisa;
   Usuario.find({ nome: new RegExp(pesquisa, "i") }).then(function (usuarios) {
-    res.render("usuario/lst.ejs", { Usuarios: usuarios });
+    res.render("usuario/lst.ejs", { Usuarios: usuarios, Login: req.user });
   });
 }
 function abreedt(req, res) {
   Usuario.findById(req.params.id).then(function (usuario) {
-    res.render("usuario/edt.ejs", { Usuario: usuario });
+    res.render("usuario/edt.ejs", { Usuario: usuario, Login: req.user });
   });
 }
 function edt(req, res) {

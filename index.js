@@ -4,6 +4,16 @@ const porta = 3000;
 const path = require("path");
 const usuarioRoute = require("./routes/UsuarioRoute");
 const passport = require("./config/passport");
+var session = require("express-session");
+
+app.use(
+  session({
+    secret: "5info",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.authenticate("session"));
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -17,11 +27,11 @@ app.get("/", function (req, res) {
   res.render("login/login.ejs");
 });
 
-router.post(
+app.post(
   "/",
   passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
+    successRedirect: "/usuario/lst",
+    failureRedirect: "/",
   })
 );
 
