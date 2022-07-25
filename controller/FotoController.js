@@ -8,7 +8,6 @@ function abreadd(req, res) {
 }
 function add(req, res) {
   var foto = new Foto();
-  console.log(req.body);
   foto.titulo = req.body.titulo;
   foto.foto = req.file.filename;
   foto.usuarios = req.body.usuarios;
@@ -24,14 +23,13 @@ function add(req, res) {
           usuario.save();
         });
       }
-      res.redirect("/foto/lst");
+      res.redirect("/fotos/lst");
     }
   });
 }
 function lst(req, res) {
-  console.log(req.user);
   Foto.find({})
-    .populate("usuario")
+    .populate("usuarios")
     .then(function (fotos) {
       res.render("foto/lst.ejs", { Fotos: fotos, Login: req.user });
     });

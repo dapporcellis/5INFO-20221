@@ -1,5 +1,5 @@
 <%-include('../cabecalho.ejs')%>
-<%-include('../cabecalho.ejs')%>
+
 <div class="app-main__outer">
     <div class="app-main__inner">
         <div class="app-page-title">
@@ -9,8 +9,8 @@
                         <i class="pe-7s-display1 icon-gradient bg-premium-dark">
                         </i>
                     </div>
-                    <div>Adicionar Usuário
-                        <div class="page-title-subheading">Este formulário é usado para adicionar usuários na aplicação.
+                    <div>Listar Fotos
+                        <div class="page-title-subheading">Esta tela lista as fotos cadastradas
                         </div>
                     </div>
                 </div>
@@ -91,45 +91,46 @@
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
                             <div class="card-body">
-                                <h5 class="card-title">Simple table</h5>
+                                <h5 class="card-title">Fotos</h5>
                                 <table class="mb-0 table">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Titulo</th>
                                             <th>Data</th>
-                                            <th>Usuario</th>
+                                            <th>Usuarios</th>
                                             <th>Foto</th>
                                             <th>Edita</th>
                                             <th>Deleta</th>
                                         </tr>
                                     </thead>
-                                    <% Postagens.forEach(function(postagem){ %>
+                                    <% Fotos.forEach(function(foto){ %>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <%=postagem._id%>
+                                                <%=foto._id%>
                                             </td>
                                             <td>
-                                                <%=postagem.titulo%>
+                                                <%=foto.titulo%>
                                             </td>
                                             <td>
-                                                <%=postagem.data%>
+                                                <%=foto.data%>
                                             </td>
                                             <td>
-                                                <%=postagem.usuario.nome%>
+                                                <%foto.usuarios.forEach(function(usuario){%>
+                                                <%=usuario.nome%> - <%=usuario.email%>
+                                                <%})%>
                                             </td>
                                             <td>
-                                                <img style="max-width:20%;" src="/fotos/<%=postagem.foto%>"
-                                                    alt="Foto do usuário">
+                                                <img style="max-width:20%;" src="/fotos/<%=foto.foto%>" alt="Foto">
                                             </td>
                                             <td>
-                                                <a href="/postagem/edt/<%=postagem._id%>">
+                                                <a href="/postagem/edt/<%=foto._id%>">
                                                     <i style="font-size:15pt" class="metismenu-icon pe-7s-note"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="/postagem/del/<%=postagem._id%>">
+                                                <a href="/postagem/del/<%=foto._id%>">
                                                     <i style="font-size:15pt" class="metismenu-icon pe-7s-junk"></i>
                                                 </a>
                                             </td>
