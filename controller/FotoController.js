@@ -12,10 +12,18 @@ function add(req, res) {
   foto.titulo = req.body.titulo;
   foto.foto = req.file.filename;
   foto.usuarios = req.body.usuarios;
+
   foto.save(function (err, result) {
     if (err) {
       res.send("Aconteceu o seguinte erro: " + err);
     } else {
+      let i;
+      for (i = 0; i < req.body.usuarios.length; i++) {
+        Usuario.findById(req.body.usuarios[i]).then(function (usuario) {
+          usuario.fotos.push(result._id);
+          usuario.save();
+        });
+      }
       res.redirect("/foto/lst");
     }
   });
