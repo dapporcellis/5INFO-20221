@@ -13,6 +13,12 @@ const UsuarioSchema = conexao.Schema({
   foto: {
     type: "String",
   },
+  fotos: [
+    {
+      type: conexao.Schema.Types.ObjectId,
+      ref: "Foto",
+    },
+  ],
 });
 
 module.exports = conexao.model("Usuario", UsuarioSchema);
