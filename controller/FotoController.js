@@ -8,10 +8,10 @@ function abreadd(req, res) {
 }
 function add(req, res) {
   var foto = new Foto();
+  console.log(req.body);
   foto.titulo = req.body.titulo;
-  foto.texto = req.body.texto;
   foto.foto = req.file.filename;
-  foto.usuario = req.user.id;
+  foto.usuarios = req.body.usuarios;
   foto.save(function (err, result) {
     if (err) {
       res.send("Aconteceu o seguinte erro: " + err);

@@ -35,17 +35,14 @@
                                         <small class="form-text text-muted">Escolha uma foto para a postagem.</small>
                                     </div>
                                     <div class="position-relative form-group">
-                                        <div>
+                                        <label for="exampleCustomMutlipleSelect" class="">Usuarios</label>
+                                        <select name="usuarios" multiple="" type="select"
+                                            id="exampleCustomMutlipleSelect" name="customSelect" class="custom-select">
                                             <%Usuarios.forEach(function(usuario){%>
-                                            <div class="custom-checkbox custom-control"><input type="checkbox"
-                                                    name="usuarios" id="<%=usuario._id%>"
-                                                    class="custom-control-input"><label class="custom-control-label"
-                                                    for="<%=usuario._id%>"
-                                                    value="<%=usuario._id%>"><%=usuario.nome%></label></div>
+                                            <option value="<%=usuario._id%>"><%=usuario.nome%></option>
                                             <%})%>
-                                        </div>
-                                    </div>
-                                    <input type="submit" class="mt-1 btn btn-primary" value="Salvar">
+                                        </select>
+                                    </div> <input type="submit" class="mt-1 btn btn-primary" value="Salvar">
                                 </form>
                             </div>
                         </div>
