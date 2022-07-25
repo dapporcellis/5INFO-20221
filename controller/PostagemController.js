@@ -27,11 +27,11 @@ function lst(req, res) {
 }
 function filtro(req, res) {
   var pesquisa = req.body.pesquisa;
-  Postagem.find({ titulo: new RegExp(pesquisa, "i") }).then(function (
-    postagens
-  ) {
-    res.render("postagem/lst.ejs", { Postagens: postagens, Login: req.user });
-  });
+  Postagem.find({ titulo: new RegExp(pesquisa, "i") })
+    .populate("usuario")
+    .then(function (postagens) {
+      res.render("postagem/lst.ejs", { Postagens: postagens, Login: req.user });
+    });
 }
 function abreedt(req, res) {
   Postagem.findById(req.params.id).then(function (postagem) {

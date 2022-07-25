@@ -36,13 +36,21 @@ function lst(req, res) {
 }
 function filtro(req, res) {
   var pesquisa = req.body.pesquisa;
-  Foto.find({ titulo: new RegExp(pesquisa, "i") }).then(function (fotos) {
-    res.render("foto/lst.ejs", { Fotos: fotos, Login: req.user });
-  });
+  Foto.find({ titulo: new RegExp(pesquisa, "i") })
+    .populate("usuarios")
+    .then(function (fotos) {
+      res.render("foto/lst.ejs", { Fotos: fotos, Login: req.user });
+    });
 }
 function abreedt(req, res) {
-  Foto.findById(req.params.id).then(function (foto) {
-    res.render("foto/edt.ejs", { Foto: foto, Login: req.user });
+  Usuario.find({}).then(function (usuarios) {
+    Foto.findById(req.params.id).then(function (foto) {
+      res.render("foto/edt.ejs", {
+        Foto: foto,
+        Login: req.user,
+        Usuarios: usuarios,
+      });
+    });
   });
 }
 function edt(req, res) {
@@ -50,23 +58,33 @@ function edt(req, res) {
     req.params.id,
     {
       titulo: req.body.titulo,
-      texto: req.body.texto,
-      usuario: req.user.id,
+      usuarios: req.body.usuarios,
       foto: req.file.filename,
     },
     function (err, result) {
       if (err) {
         res.send("Aconteceu o seguinte erro: " + err);
       } else {
-        res.redirect("/foto/lst");
+        res.redirect("/fotos/lst");
       }
     }
   );
 }
 function deleta(req, res) {
-  Foto.findByIdAndDelete(req.params.id).then(function (valor) {
-    res.redirect("/foto/lst");
-  });
+  console.log();
+  Foto.findByIdAndDelete(req.params.id)
+    .populate("usuarios")
+    .then(function (valor) {
+      console.log(valor);
+      let i;
+      for (i = 0; i < valor.usuarios.length; i++) {
+        Usuario.findById(valor.usuarios[i]).then(function (usuario) {
+          usuario.fotos.splice(usuario.fotos.indexOf(valor._id), 1);
+          usuario.save();
+        });
+      }
+      res.redirect("/fotos/lst");
+    });
 }
 
 module.exports = { abreadd, add, lst, filtro, abreedt, edt, deleta };
