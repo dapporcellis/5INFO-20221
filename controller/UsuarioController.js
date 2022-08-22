@@ -8,7 +8,7 @@ function add(req, res) {
   usuario.nome = req.body.nome;
   usuario.email = req.body.email;
   usuario.senha = req.body.senha;
-  usuario.foto = req.file.url;
+  usuario.foto = req.file.path;
   usuario.save(function (err, result) {
     if (err) {
       res.send("Aconteceu o seguinte erro: " + err);
@@ -18,7 +18,6 @@ function add(req, res) {
   });
 }
 function lst(req, res) {
-  console.log(req.user);
   Usuario.find({}).then(function (usuarios) {
     res.render("usuario/lst.ejs", { Usuarios: usuarios, Login: req.user });
   });
@@ -41,7 +40,7 @@ function edt(req, res) {
       nome: req.body.nome,
       email: req.body.email,
       senha: req.body.senha,
-      foto: req.file.url,
+      foto: req.file.path,
     },
     function (err, result) {
       if (err) {
