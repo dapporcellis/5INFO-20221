@@ -7,7 +7,7 @@ function add(req, res) {
   var postagem = new Postagem();
   postagem.titulo = req.body.titulo;
   postagem.texto = req.body.texto;
-  postagem.foto = req.file.url;
+  postagem.foto = req.file.path;
   postagem.usuario = req.user.id;
   postagem.save(function (err, result) {
     if (err) {
@@ -45,7 +45,7 @@ function edt(req, res) {
       titulo: req.body.titulo,
       texto: req.body.texto,
       usuario: req.user.id,
-      foto: req.file.url,
+      foto: req.file.path,
     },
     function (err, result) {
       if (err) {
