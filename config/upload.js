@@ -1,6 +1,6 @@
 const multer = require("multer");
 const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 cloudinary.config({
   cloud_name: "projeto20221",
@@ -8,7 +8,7 @@ cloudinary.config({
   api_secret: "QD17N-hCKAycJEj-D_KtO6rwxqY",
 });
 
-const storage = cloudinaryStorage({
+const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   folder: "demo",
   allowedFormats: ["jpg", "png"],
