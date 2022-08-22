@@ -8,7 +8,7 @@ function add(req, res) {
   usuario.nome = req.body.nome;
   usuario.email = req.body.email;
   usuario.senha = req.body.senha;
-  usuario.foto = req.file.filename;
+  usuario.foto = req.file.url;
   usuario.save(function (err, result) {
     if (err) {
       res.send("Aconteceu o seguinte erro: " + err);
@@ -41,7 +41,7 @@ function edt(req, res) {
       nome: req.body.nome,
       email: req.body.email,
       senha: req.body.senha,
-      foto: req.file.filename,
+      foto: req.file.url,
     },
     function (err, result) {
       if (err) {

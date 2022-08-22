@@ -9,7 +9,7 @@ function abreadd(req, res) {
 function add(req, res) {
   var foto = new Foto();
   foto.titulo = req.body.titulo;
-  foto.foto = req.file.filename;
+  foto.foto = req.file.url;
   foto.usuarios = req.body.usuarios;
 
   foto.save(function (err, result) {
@@ -59,7 +59,7 @@ function edt(req, res) {
     {
       titulo: req.body.titulo,
       usuarios: req.body.usuarios,
-      foto: req.file.filename,
+      foto: req.file.url,
     },
     function (err, result) {
       if (err) {
