@@ -1,14 +1,16 @@
 const express = require("express");
 const app = express();
-const porta = 3000;
+var porta = process.env.PORT || 3000;
 const path = require("path");
 const usuarioRoute = require("./routes/UsuarioRoute");
 const postagemRoute = require("./routes/PostagemRoute");
 const FotoRoute = require("./routes/FotoRoute");
+const publicoRoute = require("./routes/PublicoRoute");
 
 const passport = require("./config/passport");
 var session = require("express-session");
 var autenticacao = require("./config/autenticacao");
+
 app.use(
   session({
     secret: "5info",
@@ -39,6 +41,8 @@ app.post(
     failureRedirect: "/",
   })
 );
+
+app.get("/publico", publicoRoute);
 
 app.listen(porta, () => {
   console.log("Servidor funcionando na porta 3000");
